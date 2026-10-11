@@ -7,3 +7,22 @@ export const api = axios.create({
         "Content-Type": "application/json"
     }
 })
+
+api.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
+
+api.interceptors.response.use(
+    (response) => response, // sucesso: só repassa
+    (error) => {
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+            localStorage.removeItem("token");
+            window.location.href = "/login"; // token expirou: volta pro login
+        }
+        return Promise.reject(error); // repassa o erro para o catch
+    }
+);
