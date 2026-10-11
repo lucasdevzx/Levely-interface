@@ -1,0 +1,144 @@
+@import "tailwindcss";
+@import "./App.css"; /* cores (tema claro/escuro) */
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================
+   RESET BÁSICO
+============================================ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+main {
+  flex: 1;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+img, picture, svg, video {
+  display: block;
+  max-width: 100%;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@theme {
+  /* Font */
+  --font-sans: 'Inter Variable', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Radius */
+  --radius-sm: 8px;    /* botão compacto, chip discreto */
+  --radius-md: 12px;   /* botão, input, card pequeno */
+  --radius-lg: 16px;   /* card normal */
+  --radius-xl: 24px;   /* card grande, modal */
+  --radius-2xl: 32px;  /* sheets, hero */
+
+  /* Font sizes */
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+}
+
+@layer utilities {
+  .component-background {
+    background-color: var(--card-elevated-1);
+    backdrop-filter: blur(30px);
+
+    border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+    box-shadow: var(--shadow-card);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+  }
+
+  .component-background-transparent {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+  }
+
+  .component-background-special {
+    background-color: var(--primary);
+    backdrop-filter: blur(30px);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: var(--shadow-primary), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+  }
+
+  .fade-text {
+    white-space: nowrap;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  }
+}
+
+/* ============================================
+   ESTRUTURA BASE PRA APP MOBILE
+============================================ */
+:root {
+  --font-opacity: 70%;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+#root {
+  min-height: 100dvh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+  padding-left: var(--safe-left);
+  padding-right: var(--safe-right);
+}
