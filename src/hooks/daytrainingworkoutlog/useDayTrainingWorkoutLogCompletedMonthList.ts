@@ -1,6 +1,6 @@
-import type { DayTrainingWorkoutLog } from '../types/dayTrainingWorkoutLog';
+import type { DayTrainingWorkoutLog } from '../../types/dayTrainingWorkoutLog.ts';
 import {useEffect, useState} from "react";
-import {findAllByCompletedActualMonth} from "../services/dayTrainingWorkoutLog.ts";
+import {findAllByCompletedActualMonth} from "../../services/dayTrainingWorkoutLog.ts";
 
 export function useDayTrainingWorkoutLogCompletedMonthList() {
     const [dayTrainingWorkoutLogs, setDayTrainingWorkoutLogs] = useState<DayTrainingWorkoutLog[] | null>(null);
