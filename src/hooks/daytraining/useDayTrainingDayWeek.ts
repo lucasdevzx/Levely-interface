@@ -3,13 +3,13 @@ import type {DayTraining} from "../../types/dayTraining.ts";
 import {findByTrainingPlannerIdAndDayOfWeek} from "../../services/dayTrainingService.ts";
 
 export function useDayTrainingDayWeek() {
-    const [dayTrainings, setDayTrainings] = useState<DayTraining[] | null>(null);
+    const [dayTraining, setDayTraining] = useState<DayTraining | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         findByTrainingPlannerIdAndDayOfWeek()
-            .then(setDayTrainings)
+            .then(setDayTraining)
             .catch((error) => {
                 setError(error.message);
             })
@@ -18,5 +18,5 @@ export function useDayTrainingDayWeek() {
             });
     }, []);
 
-    return { dayTrainings, loading, error };
+    return { dayTraining, loading, error };
 }
